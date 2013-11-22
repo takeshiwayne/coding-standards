@@ -92,12 +92,12 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                                         'order_text'     => 'must follow @subpackage (if used) or @package',
                                        ),
                        'copyright'  => array(
-                                        'required'       => true,
+                                        'required'       => false,
                                         'allow_multiple' => true,
                                         'order_text'     => 'must follow @author (if used), @subpackage (if used) or @package',
                                        ),
                        'license'    => array(
-                                        'required'       => true,
+                                        'required'       => false,
                                         'allow_multiple' => false,
                                         'order_text'     => 'must follow @copyright',
                                        ),
@@ -482,9 +482,9 @@ class Joomla_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         foreach ($indentation as $indentInfo) {
             if ($indentInfo['space'] !== 0
             // Joomla change: allow for 2 space gap.
-                && $indentInfo['space'] !== ($longestTag + 2)
+                && $indentInfo['space'] !== ($longestTag + 1)
             ) {
-                $expected = (($longestTag - strlen($indentInfo['tag'])) + 2);
+                $expected = (($longestTag - strlen($indentInfo['tag'])) + 1);
                 $space    = ($indentInfo['space'] - strlen($indentInfo['tag']));
                 $error    = '@%s tag comment indented incorrectly; expected %s spaces but found %s';
                 $data     = array(

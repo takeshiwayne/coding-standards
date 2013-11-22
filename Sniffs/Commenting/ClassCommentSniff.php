@@ -105,7 +105,7 @@ class Joomla_Sniffs_Commenting_ClassCommentSniff extends Joomla_Sniffs_Commentin
                                         'order_text'     => 'must follow @link (if used)',
                                        ),
                        'since'      => array(
-                                        'required'       => true,
+                                        'required'       => false,
                                         'allow_multiple' => false,
                                         'order_text'     => 'must follow @see (if used) or @link (if used)',
                                        ),

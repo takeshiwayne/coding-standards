@@ -358,7 +358,7 @@ class Joomla_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_S
 
                 // Make sure that there is only one space before the var type.
                 // Joomla change: 3 spaces to make it line up with the @return tag with a 2 space gap.
-                if ($param->getWhitespaceBeforeType() !== '   ') {
+                if (strlen($param->getWhitespaceBeforeType()) > 3) {
                     $error = 'Expected 3 spaces before variable type';
                     $this->currentFile->addError($error, $errorPos, 'BeforeParamType');
                 }
@@ -454,6 +454,7 @@ class Joomla_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_S
                     $this->currentFile->addError($error, $errorPos, 'MissingParamType');
                 }
 
+                /*
                 if ($paramComment === '') {
                     $error = 'Missing comment for param "%s" at position %s';
                     $data  = array(
@@ -462,20 +463,21 @@ class Joomla_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_S
                              );
                     $this->currentFile->addError($error, $errorPos, 'MissingParamComment', $data);
                 }
+                */
 
                 $previousParam = $param;
 
             }//end foreach
 
-			// Joomla modification to 2 spaces.
-            if ($spaceBeforeVar !== 2 && $spaceBeforeVar !== 10000 && $spaceBeforeComment !== 10000) {
-                $error = 'Expected 2 spaces after the longest type';
+			// Joomla modification to 1 spaces.
+            if ($spaceBeforeVar < 1 && $spaceBeforeVar !== 10000 && $spaceBeforeComment !== 10000) {
+                $error = 'Expected 1 spaces after the longest type';
                 $this->currentFile->addError($error, $longestType, 'SpacingAfterLongType');
             }
 
-			// Joomla modification to 2 spaces.
-            if ($spaceBeforeComment !== 2 && $spaceBeforeComment !== 10000) {
-                $error = 'Expected 2 spaces after the longest variable name';
+			// Joomla modification to 1 spaces.
+            if ($spaceBeforeComment < 1 && $spaceBeforeComment !== 10000) {
+                $error = 'Expected 1 spaces after the longest variable name';
                 $this->currentFile->addError($error, $longestVar, 'SpacingAfterLongName');
             }
 
