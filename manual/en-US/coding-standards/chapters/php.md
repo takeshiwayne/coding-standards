@@ -145,6 +145,24 @@ $ref1 = &$this->sql;
 >
 > In PHP 5, reference operators are not required for objects. All objects are handled by reference.
 
+## Concatenation Spacing
+There should always be a space before and after the concatenation operator ('.'). For example:
+
+```php
+$id = 1;
+echo JRoute('index.php?option=com_foo&task=foo.edit&id=' . (int) $id);
+```
+
+If the concatenation operator is the first or last character on a line, both spaces are not required. For example:
+
+```php
+$id = 1
+echo JRoute::_(
+    'index.php?option=com_foo&task=foo.edit&id=' . (int) $id
+    . '&layout=special'
+);
+```
+
 ## Arrays
 
 Assignments (the `=>` operator) in arrays may be aligned with tabs. When splitting array definitions onto several lines, the last value may also have a trailing comma. This is valid PHP syntax and helps to keep code diffs minimal.
@@ -481,7 +499,7 @@ $query = $db->getQuery(true);
 // Build the query programatically (using chaining if desired).
 $query->select('u.*')
 	// Use the qn alias for the quoteName method to quote table names.
-	->from($db->qn('#__users').' AS u'));
+	->from($db->qn('#__users') . ' AS u'));
 
 // Tell the database connector what query to run.
 $db->setQuery($query);
